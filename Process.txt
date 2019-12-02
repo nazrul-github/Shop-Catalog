@@ -1,0 +1,19 @@
+1. Save shop information in database
+2. Display shop information
+3. Level information from database  -- data will be shown in a drop down list
+4. Block information from database -- data will be shown in a drop down list
+5. Shop name must be unique
+6. All the fields are required
+7. Validation on the client side
+8. user will enter shop name in the search box and click show button, total match will be shown in the table
+
+--- Process
+
+1. Create table for shop, level and block
+2. Create store procedure for saving shop data, getting shop data with respective level and block, getting level data, getting block data
+3. Create class and properties
+4. Create gateway
+5. Do all the ado.net
+6. Do business logic
+7. create controller
+8. Create view
