@@ -1,0 +1,79 @@
+﻿@using Labtest_4.Models
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isShopExist = ViewBag.ShopExist;
+    List<Level> levels = ViewBag.Level;
+    List<Block> blocks = ViewBag.Block;
+
+    List<SelectListItem> levelListItems = new List<SelectListItem>();
+    foreach (var level in levels)
+    {
+        levelListItems.Add(new SelectListItem() { Text = level.LevelName, Value = level.LevelId.ToString() });
+    }
+    List<SelectListItem> blockListItems = new List<SelectListItem>();
+    foreach (var block in blocks)
+    {
+        blockListItems.Add(new SelectListItem() { Text = block.BlockName, Value = block.BlockId.ToString() });
+    }
+
+}
+
+<h2>Save Shop Info</h2>
+@if (isShopExist)
+{
+    <div class="alert alert-danger">
+        <p>Shop name already exist</p>
+    </div>
+}
+<form id="saveShop" method="post">
+    <div class="form-group">
+        <label for="ShopName">Shop Name</label>
+        <input type="text" class="form-control" name="ShopName" />
+    </div>
+    <div class="form-group">
+        <label for="Contact">Contact No.</label>
+        <input type="text" class="form-control" name="Contact" />
+    </div>
+    <div class="form-group">
+        <label for="LevelId">Level</label>
+        @Html.DropDownList("LevelId", levelListItems, "--Select Level--", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="BlockId">Block</label>
+        @Html.DropDownList("BlockId", blockListItems, "--Select Block--", new { @class = "form-control" })
+    </div>
+    <input type="submit" value="Save" class="btn btn-success"/>
+</form>
+@section scripts
+{
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $("#saveShop").validate({
+            rules: {
+                ShopName: "required",
+                Contact: "required",
+                LevelId: {
+                    required: true,
+                },
+                BlockId: {
+                    required: true
+                   }
+            },
+            messages: {
+                ShopName: "Please enter shop name",
+                Contact: "Please enter contact number",
+                LevelId: {
+                    required: "Please select a level"
+                },
+                BlockId: {
+                    required: "Please select a block"
+                },
+            }
+        });
+    </script>
+}
+

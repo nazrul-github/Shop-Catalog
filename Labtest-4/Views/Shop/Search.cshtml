@@ -1,0 +1,60 @@
+﻿@using Labtest_4.Models.ViewModels
+@model IEnumerable<ShopLevlBLockViewModels>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<ShopLevlBLockViewModels> shopLevlBLockViews = Model;
+    bool showTable = ViewBag.Searched;
+}
+
+<h2>Find Shop</h2>
+<form method="post">
+    <label for="ShopName">Shop Name</label>
+    <input type="text" name="ShopName" class="form-control" /><br />
+    <input type="submit" class="btn btn-success" /><br /><br /><br /><br /><br />
+
+
+</form>
+@if (showTable)
+{
+    <label>Total Match Found: </label>
+    <label id="matchFound"></label>
+
+    <table class="table" id="shopViewTable">
+        <thead>
+        <tr>
+            <th>Shop Name</th>
+            
+            
+            <th>Contact</th>
+           
+        
+            <th>Label</th>
+           
+        
+            <th>Block</th></tr>
+         
+        </thead>
+        @foreach (var shop in Model)
+        {
+            <tr>
+                <td>@shop.ShopName</td>
+                <td>@shop.Contact</td>
+                <td>@shop.LevelName</td>
+                <td>@shop.BlockName</td>
+            </tr>
+        }
+    </table>
+}
+<br/>
+<br/>
+@Html.ActionLink("Go To Home","Index")
+@section scripts
+{
+
+   
+    <script>
+        var x = document.getElementById("shopViewTable").rows.length;
+        document.getElementById("matchFound").innerHTML = x-1;
+    </script>
+}
